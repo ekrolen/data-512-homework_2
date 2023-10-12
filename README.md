@@ -107,8 +107,17 @@ Northeast   | New England | Rhode Island
 Northeast   | New England | Vermont
 Figure 3 - Rows with blanks are removed. The final output is saved to /clean_data/states_by_region.csv
 
+5. Set up your access token for use in the ORES API if you don't have one already. Per Professor McDonald, there is a guide which may be helpful (https://api.wikimedia.org/wiki/Authentication), but in the event that it is not, use the below information:
 
-5. Run the data_acquisition script to get the ORES ranking data for each page.
+"The documentation talks about using a "dashboard" for managing authentication tokens. That's a rather generous description for what looks like a simple list of token things. You might have a hard time finding this "dashboard". First, on the left hand side of the page, you'll see a column of links. The bottom section is a set of links titled "Tools". In that section is a link that says [Special pages](https://api.wikimedia.org/wiki/Special:SpecialPages) which will take you to a list of ... well, special pages. At the very bottom of the "Special pages" page is a section titled "Other special pages" (scroll all the way to the bottom). The first link in that section is called [API keys](https://api.wikimedia.org/wiki/Special:AppManagement). When you get to the "API keys" page you can create a new key.
+
+The authentication guide suggests that you should create a server-side app key. This does not seem to work correctly - as yet. It failed on multiple attempts when I attempted to create a server-side app key. BUT, there is an option to create a [Personal API token](https://api.wikimedia.org/wiki/Authentication) that should work for this course and the type of ORES page scoring that you will need to perform.
+
+Note, when you create a Personal API token you are granted the three items - a Client ID, a Client secret, and a Access token - you shold save all three of these. When you dismiss the box they are gone. If you lose any one of the tokens you can destroy or deactivate the Personal API token from the dashboard and then create a new one.
+
+The value you need to work the code below is the Access token - a very long string."
+
+6. Run the data_acquisition script to get the ORES ranking data for each page.
 
 
 ## Research Implications
