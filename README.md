@@ -42,11 +42,15 @@ us_cities_by_state_SEPT.2023.csv was given to us by Professor McDonald and conta
     
 
 ### Intermediary data files 
-#### data description, attribute description, provenance information, description of relevant resources and documentation w/ hyperlinks
-
 page_info.json - This file stores the intermediate page information for each article in our cities by state list. The articles are from us_cities_by_state_SEPT.2023.csv, and the page information comes from the MediaWiki REST API. It is structured as a JSON with article_title as the key and the lastrevid (last revision id) as the value.
 
 states_by_region.csv - This file contains the cleaned data from "US States by Region - US Census Bureau". The attributes are the same as described in "Input data" above, and were cleaned as detailed in step 4 of "Analysis Reproduction Steps".
+
+ores_scores.json - This file contains the article titles (keys) and ORES scores (values) for files which successfully processed through ORES scores the first time.
+
+new_ores_scores.json - This file contains the article titles (keys) and ORES (values) scores for files which produced a key error when run through the ORES model.
+
+final_ores_scores.json - This file contains the article titles (keys) and ORES scores (values) for the originally run files and the files contained in new_ores_scores.
 
 ### Final outputs
 final outputs - describe values of fields
@@ -62,8 +66,10 @@ In our data_acquisition code we check to see if all the page titles are unique a
 We could further clean the files e.g., by checking to see if each state in the "state" column matches the state in the "page_title" column, but we choose not to do this in favor of saving time to pull the data.
 
 ### Consideration 2
-
 The data in the data_acquisition script takes significant time to pull. Obtaining the page information will take ~2 hours, and running the ORES script can take ~5 hours. 
+
+### Consideration 3
+There are articles which ORES may not be able to return a score for - this is indicated by the API return value being "None". The list of articles is stored and printed out in the Python Notebook.
 
 
 ## Anaysis Reproduction Steps
@@ -117,7 +123,7 @@ Note, when you create a Personal API token you are granted the three items - a C
 
 The value you need to work the code below is the Access token - a very long string."
 
-6. Run the data_acquisition script to get the ORES ranking data for each page.
+6. Run the data_acquisition script, following the markdown comments, to get the ORES ranking data for each page.
 
 
 ## Research Implications
