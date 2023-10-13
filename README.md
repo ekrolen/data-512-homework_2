@@ -55,8 +55,45 @@ new_ores_scores.json - This file contains the article titles (keys) and ORES (va
 final_ores_scores.json - This file contains the article titles (keys) and ORES scores (values) for the originally run files and the files contained in new_ores_scores.
 
 ### Final outputs
-final outputs - describe values of fields
+top_10_coverage.csv - This file contains the top 10 states by article coverage (# articles / population). The attributes are as follows:
+    state: State in question
+    regional_division: Regional Division as established by the US Census
+    population: Population of the state
+    count_articles: Count of articles written about cities in the state based on our scraping
+    art_per_pop: How many articles per capita are there for the state
 
+bottom_10_coverage.csv - This file contains the bottom 10 states by article coverage (# articles / population). The attributes are as follows:
+    state: State in question
+    regional_division: Regional Division as established by the US Census
+    population: Population of the state
+    count_articles: Count of articles written about cities in the state based on our scraping
+    art_per_pop: How many articles per capita are there for the state
+
+census_reg_by_tot_coverage.csv - This file shows the Census regions in descending order of coverage.
+    regional_division: Regional Division as established by the US Census
+    population: Population of the region (constituient state populations summed)
+    count_articles: Count of articles written about cities in the region based on our scraping
+    art_per_pop: How many articles per capita are there for the region
+
+top_10_quality.csv - These are the top 10 states by quality articles/population
+    state: State in question
+    regional_division: Regional Division as established by the US Census
+    population: Population of the state
+    count_articles: Count of articles written about cities in the state based on our scraping where ORES ranked the article FA or GA.
+    art_per_pop: How many articles per capita are there for the state
+
+bottom_10_quality.csv - These are the bottom 10 states by quality articles/population
+    state: State in question
+    regional_division: Regional Division as established by the US Census
+    population: Population of the state
+    count_articles: Count of articles written about cities in the state based on our scraping where ORES ranked the article FA or GA.
+    art_per_pop: How many articles per capita are there for the state
+
+census_reg_by_quality_coverage.csv - These are the census regions by quality of articles/population
+    regional_division: Regional Division as established by the US Census
+    population: Population of the region (sum of state populations in region)
+    count_articles: Count of articles written about cities in the region based on our scraping where ORES ranked the article FA or GA.
+    art_per_pop: How many articles per capita are there for the region
 
 ## Known Issues and Special Considerations
 
@@ -131,6 +168,8 @@ The value you need to work the code below is the Access token - a very long stri
 6. Run the data_acquisition script, following the markdown comments, to get the ORES ranking data for each page.
 
 7. Run the data_processing script, following the markdown comments.
+
+8. Run the data_analysis script. 
 
 
 ## Research Implications
