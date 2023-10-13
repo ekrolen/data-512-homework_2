@@ -22,7 +22,7 @@ We will leverage code developed by Dr. David W. McDonald for use in Data 512  wh
 ### Input data
 We will input 3 sources of raw data: NST-EST2022-POP.xlsx, US States by Region - US Census Bureau - Sheet1.csv, and us_cities_by_state_SEPT.2023.csv. Download information can be found in the "Analysis Reproduction Steps" of this document below.
 
-NST-EST2022-POP.xlsx has the following variables and definitions:
+NST-EST2022-POP.csv has the following variables and definitions:
     Geographic Area: Total US, Northeast/Midwest/South/West regions, and per-state divisions of population
     April 1, 2020 Estimates Base: The base population used for future estimates
     Population Estimate (as of July 1):
@@ -42,6 +42,8 @@ us_cities_by_state_SEPT.2023.csv was given to us by Professor McDonald and conta
     
 
 ### Intermediary data files 
+clean_us_cities_by_state - This file contains the same information as us_cities_by_state_SEPT.2023.csv, but duplicate rows have been removed, as well as page titles not related to US cities ('2020 United States census', '2010 United States census', 'County (United States)', 'Population')
+
 page_info.json - This file stores the intermediate page information for each article in our cities by state list. The articles are from us_cities_by_state_SEPT.2023.csv, and the page information comes from the MediaWiki REST API. It is structured as a JSON with article_title as the key and the lastrevid (last revision id) as the value.
 
 states_by_region.csv - This file contains the cleaned data from "US States by Region - US Census Bureau". The attributes are the same as described in "Input data" above, and were cleaned as detailed in step 4 of "Analysis Reproduction Steps".
@@ -71,16 +73,19 @@ The data in the data_acquisition script takes significant time to pull. Obtainin
 ### Consideration 3
 There are articles which ORES may not be able to return a score for - this is indicated by the API return value being "None". The list of articles is stored and printed out in the Python Notebook.
 
+### Consideration 4
+There are states which do not have any articles written about their cities, per our data. Given we can look up city information from Connecticut and Nebraska on Wikipedia, we believe this is an issue with our scraping, rather than a lack of articles. We will proceed without the CT and NE data in our analysis, though this isn't ideal.
+
 
 ## Anaysis Reproduction Steps
 
 1. Download the us_cities_by_state_SEPT.2023.csv file from this link (https://drive.google.com/file/d/1khouDmMaZyKo0y5WkFj4lu7g8o35x_98/view) and add it to the raw_data folder.
 
-2. Download population estimates for each US state from the Census Bureau website. The excel is named "Annual Estimates of the Resident Population for the United States, Regions, States, District of Columbia and Puerto Rico: April 1, 2020 to July 1, 2022 (NST-EST2022-POP)" and can be found at this link (https://www.census.gov/data/tables/time-series/demo/popest/2020s-state-total.html). Save the downloaded file to the raw_data folder.
+2. Download population estimates for each US state from the Census Bureau website. The excel is named "Annual Estimates of the Resident Population for the United States, Regions, States, District of Columbia and Puerto Rico: April 1, 2020 to July 1, 2022 (NST-EST2022-POP)" and can be found at this link (https://www.census.gov/data/tables/time-series/demo/popest/2020s-state-total.html). Save the downloaded file as a csv to the raw_data folder.
 
 3. Download the states in each region from the course website (https://docs.google.com/spreadsheets/d/14Sjfd_u_7N9SSyQ7bmxfebF_2XpR8QamvmNntKDIQB0/edit#gid=0). The file is named "US States by Region - US Census Bureau" and should be downloaded as a csv and saved to the raw_data folder.
 
-4. The "US States by Region - US Census Bureau" requires some processing before it can be used. Namely, it needs to be reorganized into a table with a region and division for each state rather than the raw, human-readable, indented format it comes in. While we could make these changes programmatically, we believe they are faster to make by hand. The user should "fill" all the blank cells with the REGION or DIVISION at the top of the blank section. As an example, the file should transition from figure 1 to figure 2. Values should not be filled in to the left or right. Rows which contain blank values should be removed (figure 3). Save the new datafile to the clean_data folder as "states_by_region.csv".
+4. The "US States by Region - US Census Bureau" requires some processing before it can be used. Namely, it needs to be reorganized into a table with a region and division for each state rather than the raw, human-readable, indented format it comes in. While we could make these changes programmatically, we believe they are faster to make by hand. The user should "fill" all the blank cells with the REGION or DIVISION at the top of the blank section. As an example, the file should transition from figure 1 to figure 2. Values should not be filled in to the left or right. Rows which contain blank values should be removed (figure 3). Save the new datafile to the raw_data folder as "states_by_region.csv".
 
 REGION      | DIVISION    | STATE
 Northeast   |             |
@@ -124,6 +129,8 @@ Note, when you create a Personal API token you are granted the three items - a C
 The value you need to work the code below is the Access token - a very long string."
 
 6. Run the data_acquisition script, following the markdown comments, to get the ORES ranking data for each page.
+
+7. Run the data_processing script, following the markdown comments.
 
 
 ## Research Implications
