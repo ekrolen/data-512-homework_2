@@ -171,7 +171,7 @@ Note, when you create a Personal API token you are granted the three items - a C
 
 The value you need to work the code below is the Access token - a very long string."
 
-**All scripts can be found in the "scr" folder, per the recommended file structure in the week 1 reading. Please ignore any ".ipynb_checkpoints" as these are an artifact of using Jupyter with github.**
+**All scripts can be found in the "scr" folder**
 
 6. Run the data_acquisition script, following the markdown comments, to get the ORES ranking data for each page.
 
