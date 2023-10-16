@@ -171,7 +171,7 @@ Note, when you create a Personal API token you are granted the three items - a C
 
 The value you need to work the code below is the Access token - a very long string."
 
-**All scripts can be found in the "scr" folder**
+**We have broken the workflow into 3 stages (acquisition, processing and analysis), each of which contains its own notebook with all parts necessary to run. We did this to increase usability and modularity. All scripts can be found in the "scr" folder**
 
 6. Run the data_acquisition script, following the markdown comments, to get the ORES ranking data for each page.
 
